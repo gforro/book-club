@@ -26,7 +26,7 @@ const IndexPage = ({data: {allBook: {edges: books}}}) => {
   return (
     <Layout>
       {books.map(({node: book}) => (
-        <BookItem title={book.title} author={book.author.name} summary={book.summary} key={book.id} imageUrl={book.imageUrl}>
+        <BookItem title={book.title} author={book.author.name} summary={book.summary} key={book.id} imageUrl={book.imageUrl} fixed={book.localImage.childImageSharp.fixed}>
           <LinkButton>
             <Link to={`/book/${book.id}`}>Join conversation</Link>
           </LinkButton>
@@ -39,19 +39,26 @@ const IndexPage = ({data: {allBook: {edges: books}}}) => {
 export default IndexPage
 
 export const query = graphql`
-  query {
-    allBook {
-      edges {
-        node {
-          summary
-          title
-          id
-          imageUrl
-          author {
-            name
-          }
+    query {
+        allBook {
+            edges {
+                node {
+                    title
+                    author {
+                        name
+                    }
+                    summary
+                    id
+                    imageUrl
+                    localImage {
+                        childImageSharp {
+                            fixed(width: 200) {
+                                ...GatsbyImageSharpFixed
+                            }
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 `

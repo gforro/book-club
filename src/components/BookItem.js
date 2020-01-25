@@ -1,11 +1,13 @@
 import React from "react"
 import styled from 'styled-components'
+import Img from 'gatsby-image'
 
-const StyledBookItem = styled.section`
+const BookItemStyledWrapper = styled.section`
   border: 1px solid lightgray;
   padding: 8px;
   margin-bottom: 16px;
-  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
   h2 {
     small {
       font-weight: normal;
@@ -13,21 +15,33 @@ const StyledBookItem = styled.section`
       color: grey;
     }
   }
-  img {
-    float: left;
-    width: 20%;
-    margin: 0 8px 0 0;
-  }
 `
 
-const BookItem = ({title, author, summary, imageUrl, children}) => {
+const BookItemImageStyledWrapper = styled.div`
+  flex: 1;
+  margin-right: 16px;
+  img {
+    margin: 0;
+    
+  }
+`
+const BookItemContentStyledWrapper = styled.div`
+  flex: 6;
+`
+
+const BookItem = ({title, author, summary, imageUrl, fixed, children}) => {
   return (
-    <StyledBookItem>
-      <img src={imageUrl} alt={`Cover for $title`}/>
-      <h2>{title} <small>{author}</small></h2>
-      <p>{summary}</p>
-      {children}
-    </StyledBookItem>
+    <BookItemStyledWrapper>
+      <BookItemImageStyledWrapper>
+        {/*<img src={imageUrl} alt={`Cover for $title`}/>*/}
+        <Img fixed={fixed}/>
+      </BookItemImageStyledWrapper>
+      <BookItemContentStyledWrapper>
+        <h2>{title} <small>{author}</small></h2>
+        <p>{summary}</p>
+        {children}
+      </BookItemContentStyledWrapper>
+    </BookItemStyledWrapper>
   )
 }
 
