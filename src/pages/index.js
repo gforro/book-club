@@ -26,7 +26,7 @@ const IndexPage = ({data: {allBook: {edges: books}}}) => {
   return (
     <Layout>
       {books.map(({node: book}) => (
-        <BookItem title={book.title} author={book.author.name} summary={book.summary} key={book.id}>
+        <BookItem title={book.title} author={book.author.name} summary={book.summary} key={book.id} imageUrl={book.imageUrl}>
           <LinkButton>
             <Link to={`/book/${book.id}`}>Join conversation</Link>
           </LinkButton>
@@ -46,6 +46,7 @@ export const query = graphql`
           summary
           title
           id
+          imageUrl
           author {
             name
           }

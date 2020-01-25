@@ -16,6 +16,7 @@ exports.createPages = ({graphql, actions: {createPage}}) => {
             summary
             title
             id
+            imageUrl
             author {
               name
             }
@@ -31,7 +32,8 @@ exports.createPages = ({graphql, actions: {createPage}}) => {
       createPage({
         path: `/book/${book.node.id}`,
         component: bookTemplate,
-        context: book.node
+        context: book.node,
+        imageUrl: book.imageUrl
       })
     })
 
